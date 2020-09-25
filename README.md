@@ -31,3 +31,7 @@ Orders: 97.0 (1,701,562.0 units)
 Max Buy: 21,530.0 ISK
 Orders: 6.0 (15,696.0 units)
 ```
+## To Do
+* Add ability to search different stations/systems/regions
+* Add a UI?
+* Find a way to automatically pull updated list of <code>type_id</code>s
