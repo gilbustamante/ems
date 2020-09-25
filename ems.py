@@ -11,7 +11,7 @@ import requests
 def lookup_item_id(item_name):
     """Takes given item name and returns the item type_id"""
     csv_file = 'invTypes.csv'
-    with open(csv_file) as r_file:
+    with open(csv_file, encoding="utf8") as r_file:
         reader = csv.reader(r_file)
         for row in reader:
             if str(item_name).upper() == row[2].upper():
