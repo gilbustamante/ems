@@ -16,6 +16,8 @@ def lookup_item_id(item_name):
         for row in reader:
             if str(item_name).upper() == row[2].upper():
                 return row[0]
+        print('No items found by that name. Is it spelled correctly?')
+        sys.exit()
 
 def add_commas_to_number(number):
     """Add commas to large numbers for legibility"""

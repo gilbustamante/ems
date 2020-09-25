@@ -33,5 +33,6 @@ Orders: 6.0 (15,696.0 units)
 ```
 ## To Do
 * Add ability to search different stations/systems/regions
-* Add a UI?
 * Find a way to automatically pull updated list of <code>type_id</code>s
+* Implement partial-name/incomplete searches
+* Add a UI?
