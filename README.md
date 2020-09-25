@@ -1,8 +1,7 @@
 # (CLI) EVE Market Search
 Basic command-line market search for EVE Online.
 ## Installation
-EMS requires the <code>requests</code> module. You can install it with the following command: <code>pip install requests</code>  
-For the moment, EMS is only compatible with Python 3 or later.  
+EMS requires the <code>requests</code> module. You can install it with the following command: <code>pip install requests</code>. For the moment, EMS is only compatible with Python 3 or later.  
 ## Usage
 Basic search syntax: <code>python ems.py your_search_here</code>  
 If the search query is more than one word (E.g. "Inertial Stabilizers II"), you must wrap it in quotes.  
