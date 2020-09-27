@@ -1,10 +1,11 @@
 # (CLI) EVE Market Search
 Basic command-line market search for EVE Online.
 ## Installation
-EMS requires the <code>requests</code> module (for API calls). You can install it with the following command: <code>pip install requests</code>. For the moment, EMS is only compatible with Python 3 or later.  
+EMS requires the <code>requests</code> module (for API calls to the [Fuzzworks Market Data API](https://market.fuzzwork.co.uk/api/)). You can install it with the following command: <code>pip install requests</code>. For the moment, EMS is only compatible with Python 3 or later.  
 ## Usage
 Basic search syntax: <code>python ems.py your_search_here</code>  
-If the search query is more than one word (E.g. "Inertial Stabilizers II"), you must wrap it in quotes. The query <strong>must</strong> be an exact match (for now).  
+  
+  If the search query is more than one word (E.g. "Inertial Stabilizers II"), you must wrap it in quotes. The query <strong>must</strong> be an exact match (for now).  
 #### Searching Multiple Items At Once
 You can search for multiple items by separating them with a space. (E.g. <code>python ems.py Rifter "EMP S" "1MN Afterburner I"</code>)
 
@@ -58,6 +59,6 @@ Orders: 7.0 (836,485.0 units)
 ## To Do
 * ~~Add ability to search multiple items~~ (Done!)
 * Add ability to search different stations/systems/regions
-* Find a way to automatically pull updated list of <code>type_id</code>s
+* Find a way to automatically pull updated list of <code>type_id</code>
 * Implement partial-name/incomplete searches
 * Add a UI?
