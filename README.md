@@ -6,22 +6,23 @@ EMS requires the <code>requests</code> module (for API calls). You can install i
 Basic search syntax: <code>python ems.py your_search_here</code>  
 If the search query is more than one word (E.g. "Inertial Stabilizers II"), you must wrap it in quotes. The query <strong>must</strong> be an exact match (for now).  
 #### Searching Multiple Items At Once
-You can search for multiple items by separating them with a space. (E.g. <code>python ems.py Rifter "EMP S" "1MN Afterburner I" "Gyrostabilizer I"</code>)
+You can search for multiple items by separating them with a space. (E.g. <code>python ems.py Rifter "EMP S" "1MN Afterburner I"</code>)
 
 ## Examples  
+#### Searching for one item
 Input:  
 ```
 python ems.py Gila
 ```
 Output:  
 ```
-====Jita 4-4 CNAP Price====
+====Jita Price: Gila====
 Min Sell: 155,100,000.0 ISK
 Orders: 91.0 (743.0 units)
 
 Max Buy: 135,000,000.0 ISK
 Orders: 6.0 (6.0 units)
-===========================
+========================
 ```
 #### Searching for multiple items
 Input:
@@ -55,6 +56,7 @@ Orders: 7.0 (836,485.0 units)
 ====================================================
 ```
 ## To Do
+* ~~Add ability to search multiple items~~ (Done!)
 * Add ability to search different stations/systems/regions
 * Find a way to automatically pull updated list of <code>type_id</code>s
 * Implement partial-name/incomplete searches
