@@ -35,19 +35,20 @@ def search_market(item_id, item_name):
     min_sell = result[f'{item_id}']['sell']['min']
     buy_volume = result[f'{item_id}']['buy']['volume']
     sell_volume = result[f'{item_id}']['sell']['volume']
-    sell_orders_count = result[f'{item_id}']['sell']['orderCount']
-    buy_orders_count = result[f'{item_id}']['buy']['orderCount']
     title = f'====Jita Price: {item_name}===='
 
-    # Print result
+    return print_prices(title, min_sell, max_buy, sell_volume, buy_volume)
+
+def print_prices(title, min_sell, max_buy, sell_volume, buy_volume):
+    """Print the results"""
+    print('')
     print(title)
     print(f'Min Sell: {add_commas_to_number(min_sell)} ISK')
-    print(f'Orders: {add_commas_to_number(sell_orders_count)} ({add_commas_to_number(sell_volume)} units)')
+    print(f'Units: {add_commas_to_number(sell_volume)}')
     print('')
     print(f'Max Buy: {add_commas_to_number(max_buy)} ISK')
-    print(f'Orders: {add_commas_to_number(buy_orders_count)} ({add_commas_to_number(buy_volume)} units)')
+    print(f'Units: {add_commas_to_number(buy_volume)}')
     print('=' * len(title))
-    print('')
 
 if __name__ == '__main__':
     # Temporary solution until I can write a better one
