@@ -50,11 +50,14 @@ def print_prices(title, min_sell, max_buy, sell_volume, buy_volume):
     print(f'Units: {add_commas_to_number(buy_volume)}')
     print('=' * len(title))
 
-if __name__ == '__main__':
-    # Temporary solution until I can write a better one
-    ITEM_IDS = []
-    INPUT = sys.argv[1:]
-    for item in INPUT:
-        ITEM_IDS.append(lookup_item_id(item))
-    for item_id, item_name in ITEM_IDS:
+def main():
+    """Main function"""
+    item_ids = []
+    user_input = sys.argv[1:]
+    for item in user_input:
+        item_ids.append(lookup_item_id(item))
+    for item_id, item_name in item_ids:
         search_market(item_id, item_name)
+
+if __name__ == '__main__':
+    main()
