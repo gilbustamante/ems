@@ -19,10 +19,10 @@ Output:
 ```
 ====Jita Price: Gila====
 Min Sell: 155,100,000.0 ISK
-Orders: 91.0 (743.0 units)
+Units: 743.0
 
 Max Buy: 135,000,000.0 ISK
-Orders: 6.0 (6.0 units)
+Units: 6.0
 ========================
 ```
 #### Searching for multiple items
@@ -34,26 +34,26 @@ Output:
 ```
 ====Jita Price: Thorax====
 Min Sell: 13,440,000.0 ISK
-Orders: 26.0 (158.0 units)
+Units: 158.0
 
 Max Buy: 9,929,000.0 ISK
-Orders: 9.0 (63.0 units)
+Units: 63.0
 ==========================
 
 ====Jita Price: Magnetic Field Stabilizer I====
 Min Sell: 82,370.0 ISK
-Orders: 24.0 (6,145.0 units)
+Units: 6,145.0
 
 Max Buy: 60,000.0 ISK
-Orders: 12.0 (2,426.0 units)
+Units: 2,426.0
 ===============================================
 
 ====Jita Price: Caldari Navy Antimatter Charge M====
 Min Sell: 716.5 ISK
-Orders: 43.0 (7,472,089.0 units)
+Units: 7,472,089.0
 
 Max Buy: 646.1 ISK
-Orders: 7.0 (836,485.0 units)
+Units: 836,485.0
 ====================================================
 ```
 ## To Do
