@@ -68,7 +68,6 @@ def determine_system(arg):
         system = 60005686
     else:
         system = 60003760
-    print(system)
     return system
 
 def search_market(item_id, item_name, given_args):
