@@ -59,15 +59,16 @@ def add_commas_to_number(number):
 def determine_system(arg):
     """Decides hub to search based on given argument"""
     if arg.a:
-        system = 60004588
-    elif arg.r:
         system = 60008494
+    elif arg.r:
+        system = 60004588
     elif arg.d:
         system = 60011866
     elif arg.hek:
         system = 60005686
     else:
         system = 60003760
+    print(system)
     return system
 
 def search_market(item_id, item_name, given_args):
@@ -109,8 +110,9 @@ def print_prices(title, min_sell, max_buy, sell_volume, buy_volume):
     print(f'Units: {add_commas_to_number(buy_volume)}')
     print('=' * len(title))
 
-def main(query):
+def main():
     """Main function"""
+    query = setup_argparse()
     item_ids = []
     user_input = query.Query
     determine_system(query)
@@ -120,5 +122,4 @@ def main(query):
         search_market(item_id, item_name, query)
 
 if __name__ == '__main__':
-    arg_setup = setup_argparse()
-    main(arg_setup)
+    main()
