@@ -66,6 +66,8 @@ def determine_system(arg):
         system = 60011866
     elif arg.hek:
         system = 60005686
+    # If no hub was specified,
+    # default to Jita 4-4
     else:
         system = 60003760
     return system
