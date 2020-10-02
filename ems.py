@@ -3,10 +3,22 @@ EVE Market Search!
 """
 import csv
 import requests
+import sys
+import os
+
+def resource_path(relative_path):
+    """
+    This function is needed for PyInstaller to correctly use
+    the absolute paths to referenced files. See the following
+    link for details: https://stackoverflow.com/a/49802075
+    """
+    if hasattr(sys, '_MEIPASS'):
+        return os.path.join(sys._MEIPASS, relative_path)
+    return os.path.join(os.path.abspath("."), relative_path)
 
 def lookup_item_id(given_name):
     """Takes given item name and returns the item type_id"""
-    csv_file = 'invTypes.csv'
+    csv_file = resource_path('invTypes.csv')
     with open(csv_file, encoding="utf8") as r_file:
         reader = csv.reader(r_file)
         for row in reader:
