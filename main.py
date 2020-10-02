@@ -43,7 +43,6 @@ while True:
     if event == 'Search':
         item_id = ems.lookup_item_id(values['-QUERY-'])
         if item_id == None:
-            # window['-SELLPRICE-'].update('Item not found.')
             sg.popup('Item not found.', modal=True)
             continue
         hub = ems.determine_system(values['-HUB-'])
@@ -54,6 +53,5 @@ while True:
         window['-BUYQUANTITY-'].update(market_info['buy_volume'])
         window['-SELLORDERS-'].update(market_info['sell_orders'])
         window['-BUYORDERS-'].update(market_info['buy_orders'])
-
 
 window.close()
