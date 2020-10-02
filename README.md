@@ -1,7 +1,7 @@
 # EVE Market Search
 ![](https://i.imgur.com/aqnoXwy.gif)  
   
-#### Basic market search for EVE Online.
+Basic market search for EVE Online.
 ## Installation
 EMS requires the <code>requests</code> module (for API calls to the [Fuzzworks Market Data API](https://market.fuzzwork.co.uk/api/)). If you are using the source code, you can install <code>requests</code> with the following command: <code>pip install requests</code>. EMS is only compatible with Python 3 or later.  
 ## Usage
