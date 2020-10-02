@@ -1,3 +1,6 @@
 ems_env/
 __pycache__/
 test
+build/
+dist/
+main.spec
