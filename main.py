@@ -20,7 +20,7 @@ column_2 = [
 ]
 
 column_3 = [
-    [sg.Button('Search', bind_return_key=True)],
+    [sg.Button('Search', bind_return_key=True), sg.Button('Clear')],
     [sg.Text('Orders')],
     [sg.Text(size=(15, 1), key='-SELLORDERS-')],
     [sg.Text('Orders')],
@@ -40,6 +40,14 @@ while True:
     event, values = window.read()
     if event == sg.WIN_CLOSED or event == 'Exit':
         break
+    if event == 'Clear':
+        window['-QUERY-'].update('')
+        window['-SELLPRICE-'].update('')
+        window['-BUYPRICE-'].update('')
+        window['-SELLQUANTITY-'].update('')
+        window['-BUYQUANTITY-'].update('')
+        window['-SELLORDERS-'].update('')
+        window['-BUYORDERS-'].update('')
     if event == 'Search':
         item_id = ems.lookup_item_id(values['-QUERY-'])
         if item_id == None:
