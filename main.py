@@ -1,7 +1,10 @@
 import PySimpleGUI as sg
 import ems
 
+# TODO: Enable 'save to file' functionality
+
 sg.theme('Default1')
+saved_items = []
 
 column_1 = [
     [sg.Input(key='-QUERY-', size=(30, 1))],
@@ -20,7 +23,7 @@ column_2 = [
 ]
 
 column_3 = [
-    [sg.Button('Search', bind_return_key=True), sg.Button('Clear')],
+    [sg.Button('Search', bind_return_key=True), sg.Button('+'), sg.Button('Clear')],
     [sg.Text('Orders')],
     [sg.Text(size=(15, 1), key='-SELLORDERS-')],
     [sg.Text('Orders')],
@@ -32,7 +35,9 @@ layout = [
         sg.Column(column_1, justification='right'),
         sg.Column(column_2, justification='right'),
         sg.Column(column_3, justification='right'),
-    ]
+    ],
+    [sg.Listbox(values=saved_items, size=(76,10), key='-SAVED-')],
+    [sg.Button('Save to file')],
 ]
 window = sg.Window('GEMS', layout)
 
@@ -40,6 +45,9 @@ while True:
     event, values = window.read()
     if event == sg.WIN_CLOSED or event == 'Exit':
         break
+    if event == '+':
+        saved_items.append(f"{window['-QUERY-'].get()} ({values['-HUB-']}) - Sell: {window['-SELLPRICE-'].get()}, Buy: {window['-BUYPRICE-'].get()}")
+        window['-SAVED-'].update(saved_items)
     if event == 'Clear':
         window['-QUERY-'].update('')
         window['-SELLPRICE-'].update('')
