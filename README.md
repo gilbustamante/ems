@@ -17,4 +17,5 @@ For the moment, <strong>the search query must be an exact match</strong>.
 * ~~Add ability to search different stations/systems/regions~~ (Done!)
 * Find a way to automatically pull updated list of <code>type_id</code>
 * Implement partial-name/incomplete searches
+* Add 'save previous searches' and 'save searches to file' functionality 
 * ~~Add a UI~~ (Done!)
