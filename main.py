@@ -49,9 +49,13 @@ while True:
         saved_items.append(f"{window['-QUERY-'].get()} ({values['-HUB-']}) - Sell: {window['-SELLPRICE-'].get()}, Buy: {window['-BUYPRICE-'].get()}")
         window['-SAVED-'].update(saved_items)
     if event == '-WRITE-':
-        text = '\n'.join(saved_items)
-        with open('ShoppingList.txt', 'w') as f:
-            f.write(text)
+        if saved_items == []:
+            sg.Popup('There are no items to add')
+            continue
+        else:
+            text = '\n'.join(saved_items)
+            with open('ShoppingList.txt', 'w') as f:
+                f.write(text)
     if event == 'Clear':
         window['-QUERY-'].update('')
         window['-SELLPRICE-'].update('')
