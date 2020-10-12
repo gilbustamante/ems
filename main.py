@@ -37,7 +37,7 @@ layout = [
         sg.Column(column_3, justification='right'),
     ],
     [sg.Listbox(values=saved_items, size=(76,10), key='-SAVED-')],
-    [sg.Button('Save to file')],
+    [sg.Button('Save Shopping List', key='-WRITE-')],
 ]
 window = sg.Window('GEMS', layout)
 
@@ -48,6 +48,10 @@ while True:
     if event == '+':
         saved_items.append(f"{window['-QUERY-'].get()} ({values['-HUB-']}) - Sell: {window['-SELLPRICE-'].get()}, Buy: {window['-BUYPRICE-'].get()}")
         window['-SAVED-'].update(saved_items)
+    if event == '-WRITE-':
+        text = '\n'.join(saved_items)
+        with open('ShoppingList.txt', 'w') as f:
+            f.write(text)
     if event == 'Clear':
         window['-QUERY-'].update('')
         window['-SELLPRICE-'].update('')
@@ -56,6 +60,8 @@ while True:
         window['-BUYQUANTITY-'].update('')
         window['-SELLORDERS-'].update('')
         window['-BUYORDERS-'].update('')
+        window['-SAVED-'].update('')
+        saved_items = []
     if event == 'Search':
         item_id = ems.lookup_item_id(values['-QUERY-'])
         if item_id == None:
