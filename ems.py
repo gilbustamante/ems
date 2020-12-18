@@ -27,7 +27,7 @@ def lookup_item_id(given_name):
         # If item is not found, return None
         return None
 
-def add_commas_to_number(number):
+def add_commas(number):
     """Add commas to large numbers for legibility"""
     return "{:,}".format(float(number))
 
@@ -54,11 +54,11 @@ def search_market(item_id, hub):
 
     # Assign values and add commas to number
     market_info = {}
-    market_info['max_buy'] = add_commas_to_number(result[f'{item_id}']['buy']['max'])
-    market_info['min_sell'] = add_commas_to_number(result[f'{item_id}']['sell']['min'])
-    market_info['buy_orders'] = add_commas_to_number(result[f'{item_id}']['buy']['orderCount'])
-    market_info['buy_volume'] = add_commas_to_number(result[f'{item_id}']['buy']['volume'])
-    market_info['sell_orders'] = add_commas_to_number(result[f'{item_id}']['sell']['orderCount'])
-    market_info['sell_volume'] = add_commas_to_number(result[f'{item_id}']['sell']['volume'])
+    market_info['max_buy'] = add_commas(result[f'{item_id}']['buy']['max'])
+    market_info['min_sell'] = add_commas(result[f'{item_id}']['sell']['min'])
+    market_info['buy_orders'] = add_commas(result[f'{item_id}']['buy']['orderCount'])
+    market_info['buy_volume'] = add_commas(result[f'{item_id}']['buy']['volume'])
+    market_info['sell_orders'] = add_commas(result[f'{item_id}']['sell']['orderCount'])
+    market_info['sell_volume'] = add_commas(result[f'{item_id}']['sell']['volume'])
 
     return market_info
