@@ -40,8 +40,8 @@ def determine_system(arg):
 
 def print_info(system_name, item_name, info_obj):
     print("===============================")
-    print(f"System: {system_name}")
-    print(f"Item: {item_name}\n")
+    print(f"System: {system_name.upper()}")
+    print(f"Item: {item_name.upper()}\n")
     for k, v in info_obj.items():
         print(f"{k}: {v}")
     print("===============================")
