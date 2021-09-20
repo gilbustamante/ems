@@ -6,7 +6,7 @@ import bz2
 def lookup_item_id(given_name):
     """Takes given item name and returns the item type_id"""
     try:
-        with bz2.open('invTypes.csv.bz2', 'rt') as f:
+        with bz2.open('invTypes.csv.bz2', 'rt', encoding="utf-8") as f:
             csv_content = csv.reader(f)
             for line in csv_content:
                 if given_name.upper() == line[2].upper():
@@ -16,7 +16,10 @@ def lookup_item_id(given_name):
         print("Item list not found. Please run this script with the -u flag "
               "to update (python ems.py -u)")
         sys.exit()
-
+    except AttributeError as e:
+        print(f"Error: {e}")
+        print("Did you forget to provide an item name?")
+        sys.exit()
 
 
 def add_commas(number):
@@ -36,6 +39,7 @@ def determine_system(arg):
     return system_dict[arg.upper()]
 
 def print_info(system_name, item_name, info_obj):
+    print("===============================")
     print(f"System: {system_name}")
     print(f"Item: {item_name}\n")
     for k, v in info_obj.items():

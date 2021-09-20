@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 """
 EVE Market Search!
 """
@@ -6,6 +7,8 @@ from pathlib import Path
 import requests
 import sys
 from helpers import add_commas, lookup_item_id, determine_system, print_info
+
+# TODO: Add absolute path for saving invTypes.csv.bz2
 
 def arguments():
     parser = argparse.ArgumentParser(add_help=False)
@@ -44,19 +47,23 @@ def search_market(item_id, hub):
 
     # Assign values and add commas to numbers for readability
     market_info = {}
-    market_info['max_buy'] = add_commas(result[item_id]['buy']['max'])
-    market_info['min_sell'] = add_commas(result[item_id]['sell']['min'])
-    market_info['buy_orders'] = add_commas(result[item_id]['buy']['orderCount'])
-    market_info['buy_volume'] = add_commas(result[item_id]['buy']['volume'])
-    market_info['sell_orders'] = add_commas(result[item_id]['sell']['orderCount'])
-    market_info['sell_volume'] = add_commas(result[item_id]['sell']['volume'])
+    try:
+        market_info['max_buy'] = add_commas(result[item_id]['buy']['max'])
+        market_info['min_sell'] = add_commas(result[item_id]['sell']['min'])
+        market_info['buy_orders'] = add_commas(result[item_id]['buy']['orderCount'])
+        market_info['buy_volume'] = add_commas(result[item_id]['buy']['volume'])
+        market_info['sell_orders'] = add_commas(result[item_id]['sell']['orderCount'])
+        market_info['sell_volume'] = add_commas(result[item_id]['sell']['volume'])
+    except KeyError:
+        print(f"Item does not exist (check spelling)")
+        sys.exit()
 
     return market_info
 
 def update_item_list():
     filename = 'invTypes.csv.bz2'
     url = 'https://www.fuzzwork.co.uk/dump/latest/invTypes.csv.bz2'
-    invtypes = Path(filename)
+    file_abs_path = Path(filename).resolve()
 
     # Begin update
     answer = input(f"Do you want to download/update {filename}? (y/n): ")
@@ -65,17 +72,17 @@ def update_item_list():
         sys.exit()
     elif answer.upper() in ['Y', 'YES']:
         try:
-            print(f"Downloading {url}... ", end="")
+            print(f"Downloading... ", end="")
             r = requests.get(url)
             print("OK.")
-            with open(filename, 'wb') as f:
+            with open(file_abs_path, 'wb') as f:
                 f.write(r.content)
         except (ConnectionError, TimeoutError) as e:
             print(f"Error: {e}")
 
         # Make sure it's there now:
         print("Checking file... ", end="")
-        if invtypes.is_file():
+        if file_abs_path.is_file():
             print(f"OK.")
         else:
             print(f"ERROR: {filename} could not be found.")
