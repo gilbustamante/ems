@@ -33,17 +33,15 @@ def add_commas(number):
 
 def determine_system(arg):
     """Decides hub to search based on given argument"""
-    if arg.upper() == 'AMARR':
-        system = 60008494
-    elif arg.upper() == 'DODIXIE':
-        system = 60011866
-    elif arg.upper() == 'HEK':
-        system = 60005686
-    elif arg.upper() == 'JITA':
-        system = 60003760
-    elif arg.upper() == 'RENS':
-        system = 60004588
-    return system
+    system_dict = {
+        'AMARR': 60008494,
+        'DODIXIE': 60011866,
+        'HEK': 60005686,
+        'JITA': 60003760,
+        'RENS': 60004588
+    }
+    if arg in system_dict.keys():
+        return system_dict[arg]
 
 def search_market(item_id, hub):
     """Takes type_id and makes request to Fuzzwork market API"""
