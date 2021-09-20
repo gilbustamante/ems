@@ -1,14 +1,15 @@
 """Helper functions for EMS"""
+import sys
+import csv
+import bz2
 
 def lookup_item_id(given_name):
     """Takes given item name and returns the item type_id"""
-    csv_file = resource_path('invTypes.csv')
-    with open(csv_file, encoding="utf8") as r_file:
-        reader = csv.reader(r_file)
-        for row in reader:
-            if str(given_name).upper() == row[2].upper():
-                return row[0]
-        # If item is not found, return None
+    with bz2.open('invTypes.csv.bz2', 'rt') as f:
+        csv_content = csv.reader(f)
+        for line in csv_content:
+            if given_name.upper() == line[2].upper():
+                return line[0]
         return None
 
 
@@ -26,5 +27,11 @@ def determine_system(arg):
         'JITA': 60003760,
         'RENS': 60004588
     }
-    if arg in system_dict.keys():
-        return system_dict[arg]
+    return system_dict[arg.upper()]
+
+def print_info(system_name, item_name, info_obj):
+    print(f"System: {system_name}")
+    print(f"Item: {item_name}\n")
+    for k, v in info_obj.items():
+        print(f"{k}: {v}")
+    print("===============================")

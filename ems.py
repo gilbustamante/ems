@@ -1,47 +1,21 @@
 """
 EVE Market Search!
 """
-import csv
+import argparse
 import requests
-import sys
-import os
+from helpers import add_commas, lookup_item_id, determine_system, print_info
 
-def resource_path(relative_path):
-    """
-    This function is needed for PyInstaller to correctly use
-    the absolute paths to referenced files. See the following
-    link for details: https://stackoverflow.com/a/49802075
-    """
-    if hasattr(sys, '_MEIPASS'):
-        return os.path.join(sys._MEIPASS, relative_path)
-    return os.path.join(os.path.abspath("."), relative_path)
-
-def lookup_item_id(given_name):
-    """Takes given item name and returns the item type_id"""
-    csv_file = resource_path('invTypes.csv')
-    with open(csv_file, encoding="utf8") as r_file:
-        reader = csv.reader(r_file)
-        for row in reader:
-            if str(given_name).upper() == row[2].upper():
-                return row[0]
-        # If item is not found, return None
-        return None
-
-def add_commas(number):
-    """Add commas to large numbers for legibility"""
-    return "{:,}".format(float(number))
-
-def determine_system(arg):
-    """Decides hub to search based on given argument"""
-    system_dict = {
-        'AMARR': 60008494,
-        'DODIXIE': 60011866,
-        'HEK': 60005686,
-        'JITA': 60003760,
-        'RENS': 60004588
-    }
-    if arg in system_dict.keys():
-        return system_dict[arg]
+def arguments():
+    parser = argparse.ArgumentParser(add_help=False)
+    parser.add_argument("--help", action="help", help="Show this message and exit")
+    parser.add_argument("-a", "--amarr", action="store_true", help="Search Amarr 8 EFA")
+    parser.add_argument("-d", "--dodixie", action="store_true", help="Search Dodixie 9-20 FNAP")
+    parser.add_argument("-h", "--hek", action="store_true", help="Search Hek 8-12 BCF")
+    parser.add_argument("-j", "--jita", action="store_true", help="Search Jita 4-4 CNAP")
+    parser.add_argument("-r", "--rens", action="store_true", help="Search Rens 6-8 BTT")
+    parser.add_argument("item_name", type=str, help="Item to search for")
+    args = parser.parse_args()
+    return args
 
 def search_market(item_id, hub):
     """Takes type_id and makes request to Fuzzwork market API"""
@@ -60,3 +34,12 @@ def search_market(item_id, hub):
     market_info['sell_volume'] = add_commas(result[f'{item_id}']['sell']['volume'])
 
     return market_info
+
+
+if __name__ == '__main__':
+    args = arguments()
+    id_ = lookup_item_id(args.item_name)
+    for arg in vars(args):
+        if getattr(args, arg) == True:
+            info = search_market(id_, determine_system(arg))
+            print_info(arg.title(), args.item_name, info)
