@@ -56,9 +56,9 @@ def search_market(item_id, hub):
 def update_item_list():
     filename = 'invTypes.csv.bz2'
     url = 'https://www.fuzzwork.co.uk/dump/latest/invTypes.csv.bz2'
-
-    # Check if invTypes.csv.bz2 exists in directory
     invtypes = Path(filename)
+
+    # Begin update
     answer = input(f"Do you want to download/update {filename}? (y/n): ")
     if answer.upper() in ['N', 'NO']:
         print("Aborting...")
@@ -68,7 +68,7 @@ def update_item_list():
             print(f"Downloading {url}... ", end="")
             r = requests.get(url)
             print("OK.")
-            with open('invTypes.csv.bz2', 'wb') as f:
+            with open(filename, 'wb') as f:
                 f.write(r.content)
         except (ConnectionError, TimeoutError) as e:
             print(f"Error: {e}")
@@ -79,6 +79,9 @@ def update_item_list():
             print(f"OK.")
         else:
             print(f"ERROR: {filename} could not be found.")
+    else:
+        print(f"Invalid answer; exiting.")
+        sys.exit()
 
 if __name__ == '__main__':
     args = arguments()

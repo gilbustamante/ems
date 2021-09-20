@@ -5,12 +5,18 @@ import bz2
 
 def lookup_item_id(given_name):
     """Takes given item name and returns the item type_id"""
-    with bz2.open('invTypes.csv.bz2', 'rt') as f:
-        csv_content = csv.reader(f)
-        for line in csv_content:
-            if given_name.upper() == line[2].upper():
-                return line[0]
-        return None
+    try:
+        with bz2.open('invTypes.csv.bz2', 'rt') as f:
+            csv_content = csv.reader(f)
+            for line in csv_content:
+                if given_name.upper() == line[2].upper():
+                    return line[0]
+            return None
+    except FileNotFoundError:
+        print("Item list not found. Please run this script with the -u flag "
+              "to update (python ems.py -u)")
+        sys.exit()
+
 
 
 def add_commas(number):
