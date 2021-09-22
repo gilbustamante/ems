@@ -8,7 +8,7 @@ import requests
 import sys
 from helpers import add_commas, lookup_item_id, determine_system, print_info
 
-# TODO: Add absolute path for saving invTypes.csv.bz2
+# TODO: Handle user entering invalid input for partial search index
 
 def arguments():
     parser = argparse.ArgumentParser(add_help=False)
