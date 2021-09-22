@@ -90,13 +90,14 @@ def update_item_list():
         print(f"Invalid answer; exiting.")
         sys.exit()
 
+
 if __name__ == '__main__':
     args = arguments()
     if args.update:
         update_item_list()
         sys.exit()
-    id_ = lookup_item_id(args.item_name)
+    full_item_name, id_ = lookup_item_id(args.item_name)
     for arg in vars(args):
         if getattr(args, arg) == True and arg != 'update':
             info = search_market(id_, determine_system(arg))
-            print_info(arg.title(), args.item_name, info)
+            print_info(arg.title(), full_item_name, info)
