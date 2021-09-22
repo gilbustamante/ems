@@ -10,6 +10,11 @@ def lookup_item_id(given_name):
         with bz2.open('invTypes.csv.bz2', 'rt', encoding="utf-8") as f:
             csv_content = csv.reader(f)
             inc_results = create_match_list(given_name, csv_content)
+            if len(inc_results) == 0:
+                print("No results found.")
+                sys.exit()
+            elif len(inc_results) == 1:
+                return inc_results[0]
             for idx, item_name in enumerate(inc_results):
                 print(f"{idx}.", item_name[0])
             choice = input("\nPlease enter an item number: ")
