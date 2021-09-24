@@ -6,9 +6,8 @@ import argparse
 from pathlib import Path
 import requests
 import sys
-from helpers import add_commas, lookup_item_id, determine_system, print_info
-
-# TODO: Handle user entering invalid input for partial search index
+from helpers import (add_commas, lookup_item_id, determine_system,
+                     print_info, quit_message)
 
 def arguments():
     parser = argparse.ArgumentParser(add_help=False)
@@ -34,7 +33,7 @@ def arguments():
                         help="Download newest item ID list")
 
     parser.add_argument("item_name", type=str, nargs="?",
-                        help="Item to search for")
+                        default='', help="Item to search for")
     args = parser.parse_args()
     return args
 
@@ -55,8 +54,7 @@ def search_market(item_id, hub):
         market_info['sell_orders'] = add_commas(result[item_id]['sell']['orderCount'])
         market_info['sell_volume'] = add_commas(result[item_id]['sell']['volume'])
     except KeyError:
-        print(f"Item does not exist (check spelling)")
-        sys.exit()
+        quit_message(f"Item does not exist (check spelling)")
 
     return market_info
 
@@ -68,8 +66,7 @@ def update_item_list():
     # Begin update
     answer = input(f"Do you want to download/update {filename}? (y/n): ")
     if answer.upper() in ['N', 'NO']:
-        print("Aborting...")
-        sys.exit()
+        quit_message("Aborting...")
     elif answer.upper() in ['Y', 'YES']:
         try:
             print(f"Downloading... ", end="")
@@ -87,15 +84,20 @@ def update_item_list():
         else:
             print(f"ERROR: {filename} could not be found.")
     else:
-        print(f"Invalid answer; exiting.")
-        sys.exit()
+        quit_message(f"Invalid answer; exiting.")
 
 
 if __name__ == '__main__':
     args = arguments()
+
     if args.update:
         update_item_list()
         sys.exit()
+
+    # Check if given item name is less than 3 characters
+    if len(args.item_name) < 3:
+        quit_message("Search query must be at least 3 characters.")
+
     full_item_name, id_ = lookup_item_id(args.item_name)
     for arg in vars(args):
         if getattr(args, arg) == True and arg != 'update':

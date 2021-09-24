@@ -23,11 +23,12 @@ EMS requires Python 3 or later.
 
    `python ems.py -u`
 
-   The file it downloads (`invTypes.csv.bz2`) is about ~1.3 MB.
+   The file it downloads ([`invTypes.csv.bz2`](https://www.fuzzwork.co.uk/dump/latest/invNames.csv.bz2)) is about ~1.3 MB.
 
 3. You're done!
 
 ## Usage
+
 To search for an item:
 
 `python ems.py <options> <item_name>`
@@ -123,4 +124,4 @@ sell_volume: 6,477,951.0
 
 ## License
 
-GPL v3.0
+[GPL v3.0](LICENSE)

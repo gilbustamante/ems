@@ -11,25 +11,21 @@ def lookup_item_id(given_name):
             csv_content = csv.reader(f)
             inc_results = create_match_list(given_name, csv_content)
             if len(inc_results) == 0:
-                print("No results found.")
-                sys.exit()
+                quit_message("No results found.")
             elif len(inc_results) == 1:
                 return inc_results[0]
             for idx, item_name in enumerate(inc_results):
                 print(f"{idx}.", item_name[0])
-            choice = input("\nPlease enter an item number: ")
-            return inc_results[int(choice)]
+            choice = input("\nEnter an item number: ")
+            if choice.isdigit():
+                return inc_results[int(choice)]
+            else:
+                quit_message("Please enter a valid item number.")
     except FileNotFoundError:
-        print("Item list not found. Please run this script with the -u flag "
-              "to update (python ems.py -u)")
-        sys.exit()
-    except AttributeError as e:
-        print(f"Error: {e}")
-        print("Did you forget to provide an item name?")
-        sys.exit()
+        quit_message("Item list not found. Please run this script with the -u "
+                     "flag to update (python ems.py -u)")
     except KeyboardInterrupt:
-        print("Aborting.")
-        sys.exit()
+        quit_message("Aborting.")
 
 
 def create_match_list(search_query, csv_object):
@@ -58,9 +54,16 @@ def determine_system(arg):
     return system_dict[arg.upper()]
 
 def print_info(system_name, item_name, info_obj):
+    """Prints collected output to stdout"""
     print("===============================")
     print(f"System: {system_name}")
     print(f"Item: {item_name}\n")
     for k, v in info_obj.items():
         print(f"{k}: {v}")
     print("===============================")
+
+def quit_message(msg=""):
+    """Prints a message and quits"""
+    import sys
+    print(msg)
+    sys.exit()
