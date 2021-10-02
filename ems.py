@@ -7,7 +7,7 @@ from pathlib import Path
 import requests
 import sys
 from helpers import (add_commas, lookup_item_id, determine_system,
-                     print_info, quit_message)
+                     print_info, quit_with_msg)
 
 def arguments():
     parser = argparse.ArgumentParser(add_help=False)
@@ -54,7 +54,7 @@ def search_market(item_id, hub):
         market_info['sell_orders'] = add_commas(result[item_id]['sell']['orderCount'])
         market_info['sell_volume'] = add_commas(result[item_id]['sell']['volume'])
     except KeyError:
-        quit_message(f"Item does not exist (check spelling)")
+        quit_with_msg(f"Item does not exist (check spelling)")
 
     return market_info
 
@@ -66,7 +66,7 @@ def update_item_list():
     # Begin update
     answer = input(f"Do you want to download/update {filename}? (y/n): ")
     if answer.upper() in ['N', 'NO']:
-        quit_message("Aborting...")
+        quit_with_msg("Aborting...")
     elif answer.upper() in ['Y', 'YES']:
         try:
             print(f"Downloading... ", end="")
@@ -84,7 +84,7 @@ def update_item_list():
         else:
             print(f"ERROR: {filename} could not be found.")
     else:
-        quit_message(f"Invalid answer; exiting.")
+        quit_with_msg(f"Invalid answer; exiting.")
 
 
 if __name__ == '__main__':
@@ -96,7 +96,7 @@ if __name__ == '__main__':
 
     # Check if given item name is less than 3 characters
     if len(args.item_name) < 3:
-        quit_message("Search query must be at least 3 characters.")
+        quit_with_msg("Search query must be at least 3 characters.")
 
     full_item_name, id_ = lookup_item_id(args.item_name)
     for arg in vars(args):

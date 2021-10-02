@@ -11,7 +11,7 @@ def lookup_item_id(given_name):
             csv_content = csv.reader(f)
             inc_results = create_match_list(given_name, csv_content)
             if len(inc_results) == 0:
-                quit_message("No results found.")
+                quit_with_msg("No results found.")
             elif len(inc_results) == 1:
                 return inc_results[0]
             for idx, item_name in enumerate(inc_results):
@@ -20,12 +20,12 @@ def lookup_item_id(given_name):
             if choice.isdigit():
                 return inc_results[int(choice)]
             else:
-                quit_message("Please enter a valid item number.")
+                quit_with_msg("Please enter a valid item number.")
     except FileNotFoundError:
-        quit_message("Item list not found. Please run this script with the -u "
+        quit_with_msg("Item list not found. Please run this script with the -u "
                      "flag to update (python ems.py -u)")
     except KeyboardInterrupt:
-        quit_message("Aborting.")
+        quit_with_msg("Aborting.")
 
 
 def create_match_list(search_query, csv_object):
@@ -62,7 +62,7 @@ def print_info(system_name, item_name, info_obj):
         print(f"{k}: {v}")
     print("===============================")
 
-def quit_message(msg=""):
+def quit_with_msg(msg="Quitting..."):
     """Prints a message and quits"""
     import sys
     print(msg)
